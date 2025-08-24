@@ -65,19 +65,33 @@ The repository provides a unified CLI to access all tools. You can refer to the 
     python cli.py pdf summarize /path/to/file.pdf --max-chars 800
     ```
 
+### Image Tools
+
+1) **Extract text from an image:**  
+  <u>Description:</u> Extracts plain text from images using Python (OpenCV + pytesseract). Useful for scanned documents, screenshots, or any image containing text.  
+  <u>Location:</u> `py_ai/image_tools/extract_text.py`  
+  <u>Trigger with the CLI:</u>
+    ```bash
+    python cli.py image extract /path/to/file.png
+    ```
+
+2) **Summarize an image using AI:**  
+  <u>Description:</u> First extracts text from an image, then summarizes it using AI models (OpenAI API). Ideal for quickly understanding text-heavy images.  
+  <u>Location:</u> `py_ai/image_tools/summarize_image.py`  
+  <u>Trigger with the CLI:</u>
+    ```bash
+    python cli.py image summarize /path/to/file.png --max-chars 800
+    ```
+
+**Notes:**  
+Make sure Tesseract OCR is installed on your system (`sudo apt install tesseract-ocr`) and available in your PATH.  
+
 ## Contributing
 
-Contributions are welcome! You can add new Python AI tools following the same structure:
+At this time, this repository is **not accepting external contributions**.  
+We may consider contributions in the future, so stay tuned!
 
-```
-py-ai/tools_name/
-├── __init__.py
-├── module1.py
-└── module2.py
-```
-
-Add CLI commands in `cli.py`.
-Update `requirements.txt` if new dependencies are needed.
+If you find issues or have suggestions, you can [contact us](https://py.ai/contact-us/).
 
 ## License
 
