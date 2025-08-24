@@ -86,6 +86,32 @@ The repository provides a unified CLI to access all tools. You can refer to the 
 **Notes:**  
 Make sure Tesseract OCR is installed on your system (`sudo apt install tesseract-ocr`) and available in your PATH.  
 
+### XLSX/CSV Tools
+
+1) **Extract text from an XLSX or CSV file:**  
+  <u>Description:</u> Extracts plain text from spreadsheets (XLSX or CSV). It combines all cell values into a readable format.  
+  <u>Location:</u> `py_ai/xlsx_csv_tools/extract_text.py`  
+  <u>Trigger with the CLI:</u>
+    ```bash
+    python cli.py xlsx-csv extract /path/to/file.xlsx
+    ```
+    or  
+    ```bash
+    python cli.py xlsx-csv extract /path/to/file.csv
+    ```
+
+2) **Summarize an XLSX or CSV using AI:**  
+  <u>Description:</u> Summarizes the contents of XLSX or CSV files using AI models (OpenAI API). Great for generating quick overviews of large datasets or reports.  
+  <u>Location:</u> `py_ai/xlsx_csv_tools/summarize_xlsx_csv.py`  
+  <u>Trigger with the CLI:</u>
+    ```bash
+    python cli.py xlsx-csv summarize /path/to/file.xlsx --max-chars 800
+    ```
+    or  
+    ```bash
+    python cli.py xlsx-csv summarize /path/to/file.csv --max-chars 800
+    ```
+
 ## Contributing
 
 At this time, this repository is **not accepting external contributions**.  

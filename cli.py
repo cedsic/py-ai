@@ -1,6 +1,7 @@
 import argparse
 from py_ai.pdf_tools import extract_text as extract_pdf_text, summarize_pdf
 from py_ai.image_tools import extract_text as extract_image_text, summarize_image
+from py_ai.csv_tools import extract_data as extract_csv, summarize_csv
 
 def main():
     parser = argparse.ArgumentParser(prog="py-ai", description="Python AI tools (Py.ai).")
@@ -24,6 +25,15 @@ def main():
     summarize_img_parser.add_argument("image", help="Path to image file")
     summarize_img_parser.add_argument("--max-chars", type=int, default=800, help="Max chars in summary")
 
+    # === CSV tool ===
+    csv_parser = subparsers.add_parser("csv", help="CSV/XLSX-related commands")
+    csv_sub = csv_parser.add_subparsers(dest="command", required=True)
+    extract_parser = csv_sub.add_parser("extract", help="Extract CSV/XLSX data")
+    extract_parser.add_argument("file", help="Path to CSV/XLSX file")
+    summarize_parser = csv_sub.add_parser("summarize", help="Summarize CSV/XLSX data using AI")
+    summarize_parser.add_argument("file", help="Path to CSV/XLSX file")
+    summarize_parser.add_argument("--max-chars", type=int, default=800, help="Max chars in summary")
+
     args = parser.parse_args()
 
     if args.tool == "pdf":
@@ -37,6 +47,12 @@ def main():
             print(extract_image_text(args.image))
         elif args.command == "summarize":
             print(summarize_image(args.image, max_chars=args.max_chars))
+
+    elif args.tool == "csv":
+        if args.command == "extract":
+            print(extract_csv(args.file))
+        elif args.command == "summarize":
+            print(summarize_csv(args.file, max_chars=args.max_chars))
 
 if __name__ == "__main__":
     main()
