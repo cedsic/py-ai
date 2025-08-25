@@ -15,7 +15,13 @@ def extract_file(file_path: Path) -> str:
     else:
         raise ValueError(f"Unsupported file type: {suffix}")
 
-def summarize_file(file_path: Path, max_chars: int = 800) -> str:
+def summarize_file(file_path, max_chars: int = 800) -> str:
+    if not isinstance(file_path, Path):
+        file_path = Path(file_path)
+
+    if not file_path.exists():
+        raise FileNotFoundError(f"File not found: {file_path}")
+
     suffix = file_path.suffix.lower()
     if suffix == ".pdf":
         return pdf.summarize_pdf(file_path, max_chars=max_chars)
