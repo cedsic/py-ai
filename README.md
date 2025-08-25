@@ -32,84 +32,98 @@ Create a virtual environment and install dependencies:
 ```bash
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install -r requirements.txt
+pip install -e .
 ```
 
-Some of our resource are using OpenAI API. It is recommended to create a .env file in the root and add your OpenAI API key:
+Some tools require OpenAI API access. Create a `.env` file in the root and add your API key:
 
 ```
 OPENAI_API_KEY=your_api_key_here
 ```
 
+For image OCR, make sure Tesseract is installed:  
+
+- Ubuntu/Debian:
+```bash
+sudo apt update
+sudo apt install tesseract-ocr
+```
+
+- MacOS:
+```bash
+brew install tesseract
+```
+
+- Windows:  
+Download and install from [Tesseract OCR](https://github.com/tesseract-ocr/tesseract) and add it to your PATH.
+
 ## Usage
 
-The repository provides a unified CLI to access all tools. You can refer to the next section for the command to trigger each tool.
+Access all tools through the unified CLI:  
+```bash
+py-ai --help
+```
+The CLI provides two main commands:  
+- `extract`: Extract raw text or data from a file.
+- `summarize`: Extract and then summarize content using AI.  
+
+Example usage:  
+```bash
+py-ai extract /path/to/file.pdf
+py-ai summarize /path/to/file.xlsx --max-chars 800
+```
+
 
 ## Tools
 
 ### PDF Tools
 
-1) **Extract text from a PDF:**  
-  <u>Description</u>: Extracts plain text from PDFs.  
-  <u>Location</u>: `py_ai/pdf_tools/extract_text.py`  
-  <u>Trigger with the CLI</u>:
+1) **Extract text from a PDF**  
+  <u>Description:</u> Extracts plain text from PDFs.  
+  <u>CLI:</u>
     ```bash
-    python cli.py pdf extract /path/to/file.pdf
+    py-ai extract /path/to/file.pdf
     ```
 
-2) **Summarize a PDF using AI:**  
-  <u>Description</u>: Summarizes PDFs using AI models (We are using the OpenAI API). Useful for quickly understanding long documents.  
-  <u>Location</u>: `py_ai/pdf_tools/summarize_pdf.py`  
-  <u>Trigger with the CLI</u>:
+2) **Summarize a PDF using AI**  
+  <u>Description:</u> Summarizes PDFs using AI models (We are using the OpenAI API). Useful for quickly understanding long documents.  
+  <u>CLI:</u>
     ```bash
-    python cli.py pdf summarize /path/to/file.pdf --max-chars 800
+    py-ai summarize /path/to/file.pdf --max-chars 800
     ```
 
 ### Image Tools
 
-1) **Extract text from an image:**  
+1) **Extract text from an image**  
   <u>Description:</u> Extracts plain text from images using Python (OpenCV + pytesseract). Useful for scanned documents, screenshots, or any image containing text.  
-  <u>Location:</u> `py_ai/image_tools/extract_text.py`  
-  <u>Trigger with the CLI:</u>
+  <u>CLI:</u>
     ```bash
-    python cli.py image extract /path/to/file.png
+    py-ai extract /path/to/file.png
     ```
 
-2) **Summarize an image using AI:**  
+2) **Summarize an image using AI**  
   <u>Description:</u> First extracts text from an image, then summarizes it using AI models (OpenAI API). Ideal for quickly understanding text-heavy images.  
-  <u>Location:</u> `py_ai/image_tools/summarize_image.py`  
-  <u>Trigger with the CLI:</u>
+  <u>CLI:</u>
     ```bash
-    python cli.py image summarize /path/to/file.png --max-chars 800
+    py-ai summarize /path/to/file.png --max-chars 800
     ```
-
-**Notes:**  
-Make sure Tesseract OCR is installed on your system (`sudo apt install tesseract-ocr`) and available in your PATH.  
 
 ### XLSX/CSV Tools
 
-1) **Extract text from an XLSX or CSV file:**  
+1) **Extract text from an XLSX or CSV file**  
   <u>Description:</u> Extracts plain text from spreadsheets (XLSX or CSV). It combines all cell values into a readable format.  
-  <u>Location:</u> `py_ai/xlsx_csv_tools/extract_text.py`  
-  <u>Trigger with the CLI:</u>
+  <u>CLI:</u>
     ```bash
-    python cli.py xlsx-csv extract /path/to/file.xlsx
-    ```
-    or  
-    ```bash
-    python cli.py xlsx-csv extract /path/to/file.csv
+    py-ai extract /path/to/file.xlsx
+    py-ai extract /path/to/file.csv
     ```
 
-2) **Summarize an XLSX or CSV using AI:**  
+2) **Summarize an XLSX or CSV using AI**  
   <u>Description:</u> Summarizes the contents of XLSX or CSV files using AI models (OpenAI API). Great for generating quick overviews of large datasets or reports.  
-  <u>Location:</u> `py_ai/xlsx_csv_tools/summarize_xlsx_csv.py`  
-  <u>Trigger with the CLI:</u>
+  <u>CLI:</u>
     ```bash
-    python cli.py xlsx-csv summarize /path/to/file.xlsx --max-chars 800
-    ```
-    or  
-    ```bash
-    python cli.py xlsx-csv summarize /path/to/file.csv --max-chars 800
+    py-ai summarize /path/to/file.xlsx --max-chars 800
+    py-ai summarize /path/to/file.csv --max-chars 800
     ```
 
 ## Contributing

@@ -1,0 +1,42 @@
+[project]
+name = "py-ai"
+version = "0.1.0"
+description = "Py.ai: AI-powered summarizer for PDFs, CSV/XLSX, and images"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "cedsic", email = "support@egem.net"}
+]
+requires-python = ">=3.10"
+keywords = ["AI", "Python", "CLI", "Summarizer", "Py.ai"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+
+dependencies = [
+    "openai",
+    "pandas",
+    "python-dotenv",
+    "opencv-python",
+    "pytesseract",
+    "Pillow",
+    "PyMuPDF",
+    "openpyxl"
+]
+
+[project.urls]
+Homepage = "https://py.ai"
+Repository = "https://github.com/cedsic/py-ai"
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+exclude = ["test_input", "tests"]
+
+[project.scripts]
+py-ai = "py_ai.cli:main"
